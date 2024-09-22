@@ -1,5 +1,6 @@
 class Schedule
 
+# 指定された期間がスケジュールされているかどうかを調べる
   def scheduled?(schedulable, start_date, end_date)
     puts "This #{schedulable.class} is not scheduled\n" +
          " between #{start_date} and #{end_date}"
@@ -12,9 +13,10 @@ module Schedulable
     attr_writer :schedule
 
     def schedule
-        @schedule ccSchedule.new
+        @schedule ||= ::Schedule.new
     end
 
+    # 指定された期間に予約可能かどうかを調べる
     def schedulable?(start_date, end_date)
         !scheduled?(start_date - lead_days, end_date)
     end
